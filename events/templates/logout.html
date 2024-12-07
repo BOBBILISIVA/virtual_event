@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Add your stylesheet here -->
+</head>
+<body>
+    <div class="container">
+        <h1>You have successfully logged out.</h1>
+        <p>Thank you for using our virtual event management platform.</p>
+        <div class="buttons">
+            <a href="{% url 'login' %}" class="btn btn-primary">Login Again</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary">Go to Homepage</a>
+        </div>
+    </div>
+</body>
+</html>

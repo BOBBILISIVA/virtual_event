@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Available Events{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Available Events</h1>
+
+    <!-- Search Form -->
+    <form method="GET" class="mb-4 d-flex justify-content-center">
+        <input
+            type="text"
+            name="search"
+            class="form-control w-50 me-2"
+            placeholder="Search events..."
+            value="{{ request.GET.search }}"
+        >
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Events Section -->
+    {% if events %}
+        <div class="row">
+            {% for event in events %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100">
+                        <!-- Event Image with Fallback -->
+                        <img
+                            src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'download.jpeg' %}{% endif %}"
+                            class="card-img-top"
+                            alt="{{ event.name }}"
+                            style="height: 200px; object-fit: cover;"
+                        >
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="text-muted">{{ event.date|date:"F j, Y" }} | {{ event.time|time:"g:i A" }}</p>
+                            <p class="card-text text-truncate" style="max-width: 100%;">{{ event.description }}</p>
+                            <a href="{% url 'event_details' event.id %}" class="btn btn-info btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted">No events available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

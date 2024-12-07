@@ -1,0 +1,49 @@
+
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update Event{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Update Event</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Event Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ event.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required>{{ event.description }}</textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" value="{{ event.date }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="time" class="form-label">Time</label>
+                    <input type="time" class="form-control" id="time" name="time" value="{{ event.time }}" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="venue" class="form-label">Venue</label>
+                <input type="text" class="form-control" id="venue" name="venue" value="{{ event.venue }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Event Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+                {% if event.image %}
+                    <p class="mt-2"><small>Current Image: <a href="{{ event.image.url }}" target="_blank">{{ event.image.name }}</a></small></p>
+                {% endif %}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Update Event</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
